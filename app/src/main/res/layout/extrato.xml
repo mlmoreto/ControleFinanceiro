@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@string/tbExtratos"
+                app:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <Button
+            android:id="@+id/btnPorConta"
+            android:layout_width="180dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="150dp"
+            android:background="#9C27B0"
+            android:text="Por Conta"
+            android:textColor="#F8F9FA"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+            android:id="@+id/btnPorNatureza"
+            android:layout_width="180dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="32dp"
+            android:background="#9C27B0"
+            android:text="Por Natureza"
+            android:textColor="#F0F2F3"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnPorConta" />
+
+    <Button
+            android:id="@+id/btnPorTipo"
+            android:layout_width="180dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="200dp"
+            android:background="#9C27B0"
+            android:text="Por Tipo de Transação"
+            android:textColor="#F2F5F7"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnPorNatureza"
+            app:layout_constraintVertical_bias="0.006" />
+</androidx.constraintlayout.widget.ConstraintLayout>

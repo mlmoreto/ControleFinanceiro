@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@string/tbCadTransac"
+                app:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descrição: "
+            android:textStyle="bold" />
+
+    <EditText
+            android:id="@+id/editTextDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conta: "
+            android:textStyle="bold" />
+
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    </Spinner>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valor: "
+            android:textStyle="bold" />
+
+    <EditText
+            android:id="@+id/editTextValor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo: "
+            android:textStyle="bold" />
+
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <RadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Única"/>
+
+    <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Repete"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantidade de vezes: "
+            android:textStyle="bold" />
+
+    <EditText
+            android:id="@+id/editTextQtd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+                android:id="@+id/btnCreditar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="#4CAF50"
+                android:text="Crédito"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+        <Button
+                android:id="@+id/btnDebitar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="#EE1909"
+                android:text="Débito"
+                android:textColor="#FCFCFC"
+                android:textStyle="bold" />
+    </LinearLayout>
+
+
+</LinearLayout>
