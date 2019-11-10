@@ -16,28 +16,28 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.CadastroConta">
+        <activity android:name=".view.CadastroContaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.CadastroTransacao">
+        <activity android:name=".view.CadastroTransacaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.ListaConta">
+        <activity android:name=".view.ListaContaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.Extrato">
+        <activity android:name=".view.ExtratoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

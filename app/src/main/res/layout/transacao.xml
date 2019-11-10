@@ -99,7 +99,7 @@
                 android:textStyle="bold" />
 
         <Button
-                android:id="@+id/btnDebitar"
+                android:id="@+id/btnSalvarConta"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:background="#EE1909"

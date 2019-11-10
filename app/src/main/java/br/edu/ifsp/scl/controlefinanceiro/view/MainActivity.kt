@@ -18,19 +18,19 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener  {
         setContentView(R.layout.activity_main)
 
         btnCadConta.setOnClickListener {
-            startActivity(Intent(this, CadastroConta::class.java))
+            startActivity(Intent(this, CadastroContaActivity::class.java))
         }
 
         btnTransacoes.setOnClickListener {
-            startActivity(Intent(this, CadastroTransacao::class.java))
+            startActivity(Intent(this, CadastroTransacaoActivity::class.java))
         }
 
         btnListaContas.setOnClickListener {
-            startActivity(Intent(this, ListaConta::class.java))
+            startActivity(Intent(this, ListaContaActivity::class.java))
         }
 
         btnExtratos.setOnClickListener {
-            startActivity(Intent(this, Extrato::class.java))
+            startActivity(Intent(this, ExtratoActivity::class.java))
         }
     }
 
