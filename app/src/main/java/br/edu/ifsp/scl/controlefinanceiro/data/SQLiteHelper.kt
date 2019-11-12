@@ -11,6 +11,7 @@ internal class SQLiteHelper(@Nullable context: Context) : SQLiteOpenHelper(conte
     @Override
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_TABLE)
+        db.execSQL(CREATE_TABLE_TRANSAC)
     }
 
     @Override
@@ -22,7 +23,9 @@ internal class SQLiteHelper(@Nullable context: Context) : SQLiteOpenHelper(conte
 
         private val DATABASE_NAME = "controleFinanceiro.db"
 
-        // Tabela de Conta
+        /* ***************************************************************
+                                 TABELA CONTA
+           *************************************************************** */
         val TABLE_CONTA = "conta"
 
         val KEY_ID = "id_conta"
@@ -37,11 +40,34 @@ internal class SQLiteHelper(@Nullable context: Context) : SQLiteOpenHelper(conte
                 + KEY_SALDO + " REAL);")
 
 
-        // Tabela de Transacao
-
         // Query de somatoria dos saldos
         val QUERY_SALDO_TOTAL = ("SELECT SUM(saldo) FROM " + TABLE_CONTA + ";")
 
+
+
+        /* ***************************************************************
+                                 TABELA TRANSACAO
+           *************************************************************** */
+        val TABLE_TRANSACAO = "transacao"
+
+        val KEY_ID_TRANSAC    = "id_transacao"
+        val KEY_DESC_TRANSAC  = "descricao"
+        //val KEY_DATA_TRANSAC  = "data"
+        val KEY_ID_CONTA      = "id_conta"
+        val KEY_VALOR_TRANSAC = "valor"
+        val KEY_NATUREZA      = "natureza" // credito ou debito
+        val KEY_TIPO_TRANSAC  = "tipo" // transporte, moradia, alimentacao etc...
+
+
+        private val CREATE_TABLE_TRANSAC = ("CREATE TABLE IF NOT EXISTS " + TABLE_TRANSACAO + " ("
+                + KEY_ID_TRANSAC + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_DESC_TRANSAC + " TEXT, "
+               // + KEY_DATA_TRANSAC + " DATE DEFAULT (DATETIME('now')), "
+                + KEY_ID_CONTA + " INTEGER, "
+                + KEY_VALOR_TRANSAC + " REAL, "
+                + KEY_NATUREZA + " TEXT, "
+                + KEY_TIPO_TRANSAC + " TEXT);")
+                //" FOREIGN KEY("+ KEY_ID_CONTA +") REFERENCES " + CREATE_TABLE + "("+ KEY_ID +");")
     }
 
 

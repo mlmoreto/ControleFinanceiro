@@ -38,7 +38,7 @@ class ContaController(val activity: Activity) {
         //mainActivity.atualizaLista(contaDao.leContas())
     }
 
-    fun retornarSaldoTotal(): Cursor? {
+    fun retornarSaldoTotal(): Float {
         return contaDAO.retornarSaldoTotal()
     }
 

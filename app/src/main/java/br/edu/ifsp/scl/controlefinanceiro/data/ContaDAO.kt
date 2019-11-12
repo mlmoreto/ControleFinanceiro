@@ -83,13 +83,21 @@ class ContaDAO(context: Context) {
 
     }
 
-    fun retornarSaldoTotal(): Cursor? {
+    fun retornarSaldoTotal(): Float{
         database = dbHelper!!.getReadableDatabase()
 
-        val select = "SELECT SUM(saldo) FROM " + SQLiteHelper.TABLE_CONTA + ";"
-        val saldoTotal = database!!.rawQuery(select, emptyArray())
+        val cursor: Cursor
 
-        return saldoTotal
+        cursor = database!!.rawQuery("SELECT SUM(saldo) AS Total FROM " + SQLiteHelper.TABLE_CONTA + ";", null)
+
+        var saldoTotal = 0
+
+        if (cursor.moveToFirst()) {
+
+            saldoTotal = cursor.getInt(cursor.getColumnIndex("Total"))
+
+        }
+        return saldoTotal.toFloat()
     }
 
 }

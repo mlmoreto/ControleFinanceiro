@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.conta_item.view.*
 class ContaAdapter(private val contas: List<Conta>,
                    private val context: Context) : Adapter<ContaAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.conta_item, parent, false)
         return ViewHolder(view)

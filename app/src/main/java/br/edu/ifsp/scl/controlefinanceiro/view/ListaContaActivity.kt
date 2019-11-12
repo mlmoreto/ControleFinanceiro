@@ -37,6 +37,7 @@ class ListaContaActivity : AppCompatActivity() {
         // Atualiza o saldo
         var saldoAtualTotal = (findViewById(R.id.txtSaldoTotal) as TextView).getText().toString()
         saldoAtualTotal = calculaSaldoTotal().toString()
+        txtSaldoTotal.text = saldoAtualTotal
     }
 
     lateinit var contaController: ContaController
@@ -46,7 +47,7 @@ class ListaContaActivity : AppCompatActivity() {
         return contaController.buscaTodas()
     }
 
-    private fun calculaSaldoTotal(): Cursor? {
+    private fun calculaSaldoTotal(): Float {
         return contaController.retornarSaldoTotal()
     }
 
