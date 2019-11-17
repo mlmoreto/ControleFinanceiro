@@ -5,6 +5,25 @@
         android:layout_height="match_parent"
         tools:context=".view.ExtratoPorConta">
 
-    <include layout="@layout/layout_comum_extrato"/>
+    <Button
+            android:id="@+id/btnDataIni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#9C27B0"
+            android:text="Data INÍCIO: DD/MM/YYYY"
+            android:textColor="#F4F5F8"
+            android:textStyle="bold" />
+
+    <Button
+            android:id="@+id/btnDataFim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#9C27B0"
+            android:text="Data FIM: DD/MM/YYYY"
+            android:textColor="#F0F0F5"
+            android:textStyle="bold" />
+
+    <include layout="@layout/layout_comum_extrato" />
+
 
 </LinearLayout>

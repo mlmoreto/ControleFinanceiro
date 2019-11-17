@@ -41,7 +41,7 @@ class CadastroTransacaoActivity : AppCompatActivity() {
         }
 
         // Tipos de transacao:
-        var tiposTransacao = arrayListOf<String>("Alimentação", "Saúde", "Transporte")
+        var tiposTransacao = arrayListOf("Alimentação", "Saúde", "Transporte", "Moradia", "Educação", "Lazer", "Tarifas Bancárias", "Luz", "Água", "Telefone")
         var tipoTransacao = ""
 
         // Seta as transacoes no spinner de transacoes
@@ -57,10 +57,8 @@ class CadastroTransacaoActivity : AppCompatActivity() {
             }
         }
 
-
-        btnCreditar.setOnClickListener { insereTransacao(idConta, "Credito", tipoTransacao) }
-        btnDebitar.setOnClickListener { insereTransacao(idConta, "Debito", tipoTransacao) }
-
+        btnCreditar.setOnClickListener { insereTransacao(idConta,"Crédito", tipoTransacao) }
+        btnDebitar.setOnClickListener { insereTransacao(idConta, "Débito", tipoTransacao) }
     }
 
     lateinit var contaController: ContaController
@@ -70,13 +68,19 @@ class CadastroTransacaoActivity : AppCompatActivity() {
     private fun insereTransacao(idConta: Long, natureza: String, tipoTransacao: String) {
 
         val descricao = (findViewById(R.id.editTextDescTrans) as EditText).getText().toString()
-        // pegar o id da conta
+
         val valor = (findViewById(R.id.editTextValor) as EditText).getText().toString()
-        // pegar o tipo
+
+        var valorTransac = 0F
 
         // Fazer tratativa do valor
+        if (natureza == "Débito")
+            valorTransac = valor.toFloat() * (-1)
+        else
+            valorTransac = valor.toFloat()
 
-        val transacao = Transacao(0, descricao, idConta, valor.toFloat(), natureza, tipoTransacao)
+        val transacao = Transacao(0, descricao, idConta, valorTransac, natureza, tipoTransacao)
+
         var id = transacaoController.insereTransacao(transacao)
 
         if (id != -1L)

@@ -5,7 +5,11 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.edu.ifsp.scl.controlefinanceiro.R
+import br.edu.ifsp.scl.controlefinanceiro.adapter.ExtratoAdapter
+import br.edu.ifsp.scl.controlefinanceiro.controller.ExtratoController
+import br.edu.ifsp.scl.controlefinanceiro.model.Transacao
 import kotlinx.android.synthetic.main.layout_comum_extrato.*
 
 class ExtratoPorNatureza : AppCompatActivity() {
@@ -14,8 +18,11 @@ class ExtratoPorNatureza : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.extrato_por_natureza)
 
+        // Criando controller
+        extratoController = ExtratoController(this)
+
         // Tipos de transacao:
-        var naturezas = arrayListOf<String>("Débito", "Crédito")
+        var naturezas = arrayListOf("Débito", "Crédito")
         var natureza = ""
 
         // Seta as transacoes no spinner de transacoes
@@ -30,5 +37,23 @@ class ExtratoPorNatureza : AppCompatActivity() {
                 natureza = naturezas[p2]
             }
         }
+
+        // Gera o extrato, populando o recycler view
+        btnGerarExt.setOnClickListener {
+
+            // Inserindo todas as contas na recycler view
+            val recyclerView = rvExtrato
+            recyclerView.adapter = ExtratoAdapter(geraExtratoPorNatureza(natureza), this)
+
+            // LinearLayout eh o gerenciador:
+            val layout = LinearLayoutManager(this)
+            recyclerView.setLayoutManager(layout)
+
+        }
+    }
+    lateinit var extratoController: ExtratoController
+
+    private fun geraExtratoPorNatureza(natureza: String): List<Transacao>{
+        return extratoController.geraExtratoPorNatureza(natureza)
     }
 }

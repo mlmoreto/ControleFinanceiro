@@ -25,7 +25,7 @@ class ContaAdapter(private val contas: List<Conta>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val conta = contas[position]
-        holder?.let {
+        holder.let {
             it.descricao.text = conta.descricao
             it.saldo.text = conta.saldo.toString()
         }

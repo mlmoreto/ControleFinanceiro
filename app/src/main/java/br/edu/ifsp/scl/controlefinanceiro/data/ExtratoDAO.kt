@@ -17,24 +17,66 @@ class ExtratoDAO(context: Context) {
         this.dbHelper = SQLiteHelper(context)
     }
 
-    fun geraExtratoPorConta(idConta: Long): List<Transacao> {
+    fun geraExtratoPorConta(idConta: Long, dataIni: String, dataFim: String): List<Transacao> {
         database = dbHelper!!.getReadableDatabase()
-
 
         val transacoes = mutableListOf(transacao)
 
         val cursor: Cursor
 
-        cursor = database!!.query(SQLiteHelper.TABLE_TRANSACAO, null, null,
-            null, null, null,
-            SQLiteHelper.KEY_DESCRICAO)
+        cursor = database!!.rawQuery("SELECT descricao, valor FROM " + SQLiteHelper.TABLE_TRANSACAO +
+                                         " WHERE id_conta = " + idConta +
+                                         " AND strftime('%d/%m/%Y', data) >= " + dataIni +
+                                         " AND strftime('%d/%m/%Y', data) <= " + dataFim + ";", null)
 
         while (cursor.moveToNext()) {
             val t = Transacao()
-            t.idConta = cursor.getLong(0)
-            t.descricao = cursor.getString(1)
-            //t.saldo = cursor.getFloat(2)
+            t.descricao = cursor.getString(0)
+            t.valor = cursor.getFloat(1)
+            transacoes.add(t)
+        }
 
+        cursor.close()
+        database!!.close()
+
+        return transacoes
+    }
+
+    fun geraExtratoPorNatureza(natureza: String): List<Transacao>{
+        database = dbHelper!!.getReadableDatabase()
+
+        val transacoes = mutableListOf(transacao)
+
+        val cursor: Cursor
+
+        cursor = database!!.rawQuery("SELECT descricao, valor FROM " + SQLiteHelper.TABLE_TRANSACAO + " WHERE natureza = '" + natureza + "';", null)
+
+        while (cursor.moveToNext()) {
+            val t = Transacao()
+            t.descricao = cursor.getString(0)
+            t.valor = cursor.getFloat(1)
+            transacoes.add(t)
+        }
+
+        cursor.close()
+        database!!.close()
+
+        return transacoes
+    }
+
+    fun geraExtratoPorTipo(tipo: String): List<Transacao>{
+        database = dbHelper!!.getReadableDatabase()
+
+        val transacoes = mutableListOf(transacao)
+
+        val cursor: Cursor
+
+        cursor = database!!.rawQuery("SELECT descricao, valor FROM " + SQLiteHelper.TABLE_TRANSACAO + " WHERE tipo = '" + tipo + "';", null)
+
+        while (cursor.moveToNext()) {
+            val t = Transacao()
+            t.descricao = cursor.getString(0)
+            t.valor = cursor.getFloat(1)
             transacoes.add(t)
         }
 
