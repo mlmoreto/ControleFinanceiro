@@ -38,7 +38,7 @@ class CadastroContaActivity : AppCompatActivity() {
         Toast.makeText(getApplicationContext(), "Conta cadastrada com sucesso!", Toast.LENGTH_LONG).show()
 
         //setContentView(R.layout.lista_contas)
-        val intent = Intent(this, ListaContaActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
@@ -53,7 +53,7 @@ class CadastroContaActivity : AppCompatActivity() {
 
             val c = Conta()
 
-            val idConta = dao.incluirConta(c) as Int
+            val idConta = dao.incluirConta(c) as Long
             c.idConta = idConta
 
             //MainActivity.adapter.adicionaContatoAdapter(c)

@@ -16,7 +16,6 @@ internal class SQLiteHelper(@Nullable context: Context) : SQLiteOpenHelper(conte
 
     @Override
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-
     }
 
     companion object {
@@ -52,7 +51,7 @@ internal class SQLiteHelper(@Nullable context: Context) : SQLiteOpenHelper(conte
 
         val KEY_ID_TRANSAC    = "id_transacao"
         val KEY_DESC_TRANSAC  = "descricao"
-        //val KEY_DATA_TRANSAC  = "data"
+        val KEY_DATA_TRANSAC  = "data"
         val KEY_ID_CONTA      = "id_conta"
         val KEY_VALOR_TRANSAC = "valor"
         val KEY_NATUREZA      = "natureza" // credito ou debito
@@ -62,7 +61,7 @@ internal class SQLiteHelper(@Nullable context: Context) : SQLiteOpenHelper(conte
         private val CREATE_TABLE_TRANSAC = ("CREATE TABLE IF NOT EXISTS " + TABLE_TRANSACAO + " ("
                 + KEY_ID_TRANSAC + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + KEY_DESC_TRANSAC + " TEXT, "
-               // + KEY_DATA_TRANSAC + " DATE DEFAULT (DATETIME('now')), "
+                + KEY_DATA_TRANSAC + " DATE DEFAULT (DATETIME('now')), "
                 + KEY_ID_CONTA + " INTEGER, "
                 + KEY_VALOR_TRANSAC + " REAL, "
                 + KEY_NATUREZA + " TEXT, "

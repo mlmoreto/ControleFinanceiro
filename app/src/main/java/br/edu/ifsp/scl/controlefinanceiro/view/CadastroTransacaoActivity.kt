@@ -2,9 +2,8 @@ package br.edu.ifsp.scl.controlefinanceiro.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.controlefinanceiro.R
 import br.edu.ifsp.scl.controlefinanceiro.controller.ContaController
@@ -14,6 +13,8 @@ import br.edu.ifsp.scl.controlefinanceiro.model.Transacao
 import kotlinx.android.synthetic.main.transacao.*
 
 class CadastroTransacaoActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.transacao)
@@ -23,19 +24,42 @@ class CadastroTransacaoActivity : AppCompatActivity() {
         transacaoController = TransacaoController(this)
 
         // Busca as contas para preenchimento do spinner
-        var listaTransacoes = contaController.buscaTodas()
+        var listaContas = contaController.buscaTodas()
+        var idConta = 0L
 
         // Seta as contas no spinner de Conta
-        spinnerConta.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaTransacoes)
+        spinnerConta.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaContas)
+
+        spinnerConta.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                idConta = listaContas[p2].idConta
+            }
+        }
 
         // Tipos de transacao:
-        var tipoTransacao = arrayListOf<String>("Alimentação", "Saúde", "Transporte")
+        var tiposTransacao = arrayListOf<String>("Alimentação", "Saúde", "Transporte")
+        var tipoTransacao = ""
 
         // Seta as transacoes no spinner de transacoes
-        spinnerTipo.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipoTransacao)
+        spinnerTipo.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tiposTransacao)
 
-        btnCreditar.setOnClickListener { insereTransacao("Credito") }
-        btnDebitar.setOnClickListener { insereTransacao("Debito") }
+        spinnerTipo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                tipoTransacao = tiposTransacao[p2]
+            }
+        }
+
+
+        btnCreditar.setOnClickListener { insereTransacao(idConta, "Credito", tipoTransacao) }
+        btnDebitar.setOnClickListener { insereTransacao(idConta, "Debito", tipoTransacao) }
 
     }
 
@@ -43,7 +67,7 @@ class CadastroTransacaoActivity : AppCompatActivity() {
     lateinit var transacaoController: TransacaoController
 
     // Insere a transacao
-    private fun insereTransacao(natureza: String) {
+    private fun insereTransacao(idConta: Long, natureza: String, tipoTransacao: String) {
 
         val descricao = (findViewById(R.id.editTextDescTrans) as EditText).getText().toString()
         // pegar o id da conta
@@ -52,7 +76,7 @@ class CadastroTransacaoActivity : AppCompatActivity() {
 
         // Fazer tratativa do valor
 
-        val transacao = Transacao(0, descricao, 1, valor.toFloat(), natureza, "Alimentacao")
+        val transacao = Transacao(0, descricao, idConta, valor.toFloat(), natureza, tipoTransacao)
         var id = transacaoController.insereTransacao(transacao)
 
         if (id != -1L)

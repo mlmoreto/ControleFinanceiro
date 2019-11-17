@@ -2,7 +2,9 @@ package br.edu.ifsp.scl.controlefinanceiro.data
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import br.edu.ifsp.scl.controlefinanceiro.data.SQLiteHelper.Companion.KEY_ID_CONTA
 import br.edu.ifsp.scl.controlefinanceiro.model.Transacao
 
 class TransacaoDAO (context: Context){
@@ -30,6 +32,16 @@ class TransacaoDAO (context: Context){
 
         database!!.close()
         return id
+    }
+
+    fun atualizaSaldoConta(valor: Float, idConta: Long, natureza: String) {
+        database = dbHelper!!.getWritableDatabase()
+
+        if (natureza == "Debito")
+            database!!.execSQL("UPDATE " + SQLiteHelper.TABLE_CONTA + " SET saldo = saldo - " + valor + " WHERE id_conta = " + idConta)
+        else
+            database!!.execSQL("UPDATE " + SQLiteHelper.TABLE_CONTA + " SET saldo = saldo + " + valor + " WHERE id_conta = " + idConta)
+
     }
 
 }

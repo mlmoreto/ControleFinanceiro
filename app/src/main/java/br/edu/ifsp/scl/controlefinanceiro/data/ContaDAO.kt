@@ -31,7 +31,7 @@ class ContaDAO(context: Context) {
 
         while (cursor.moveToNext()) {
             val c = Conta()
-            c.idConta = cursor.getInt(0)
+            c.idConta = cursor.getLong(0)
             c.descricao = cursor.getString(1)
             c.saldo = cursor.getFloat(2)
 
