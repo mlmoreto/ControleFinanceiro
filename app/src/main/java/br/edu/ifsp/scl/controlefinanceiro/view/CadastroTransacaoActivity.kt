@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.controlefinanceiro.R
 import br.edu.ifsp.scl.controlefinanceiro.controller.ContaController
 import br.edu.ifsp.scl.controlefinanceiro.controller.TransacaoController
-import br.edu.ifsp.scl.controlefinanceiro.model.Conta
 import br.edu.ifsp.scl.controlefinanceiro.model.Transacao
 import kotlinx.android.synthetic.main.transacao.*
 

@@ -23,34 +23,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <Button
-            android:id="@+id/btnCadConta"
-            android:layout_width="130dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="180dp"
-            android:background="#9C27B0"
-            android:text="Cadastrar Conta"
-            android:textColor="#F2F5F7"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-            android:id="@+id/btnTransacoes"
-            android:layout_width="130dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="180dp"
-            android:layout_marginEnd="60dp"
-            android:background="#9C27B0"
-            android:text="Transações"
-            android:textColor="#F5F6F7"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnCadConta"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
             android:id="@+id/btnListaContas"
             android:layout_width="130dp"
             android:layout_height="44dp"
@@ -63,7 +35,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCadConta"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.027" />
+
+    <Button
+            android:id="@+id/btnCadConta"
+            android:layout_width="130dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="148dp"
+            android:background="#9C27B0"
+            android:text="Cadastrar Conta"
+            android:textColor="#F2F5F7"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <Button
             android:id="@+id/btnExtratos"
@@ -78,8 +63,25 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintHorizontal_bias="0.695"
             app:layout_constraintStart_toEndOf="@+id/btnListaContas"
             app:layout_constraintTop_toBottomOf="@+id/btnTransacoes"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.027" />
+
+    <Button
+            android:id="@+id/btnTransacoes"
+            android:layout_width="130dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="148dp"
+            android:layout_marginEnd="60dp"
+            android:background="#9C27B0"
+            android:text="Transações"
+            android:textColor="#F5F6F7"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.695"
+            app:layout_constraintStart_toEndOf="@+id/btnCadConta"
+            app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

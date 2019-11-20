@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.edu.ifsp.scl.controlefinanceiro.R
 import br.edu.ifsp.scl.controlefinanceiro.adapter.ExtratoAdapter
 import br.edu.ifsp.scl.controlefinanceiro.controller.ExtratoController
+import br.edu.ifsp.scl.controlefinanceiro.dto.TransacaoDto
 import br.edu.ifsp.scl.controlefinanceiro.model.Transacao
 import kotlinx.android.synthetic.main.layout_comum_extrato.*
 
@@ -54,7 +55,7 @@ class ExtratoPorTipo : AppCompatActivity() {
 
     lateinit var extratoController: ExtratoController
 
-    private fun geraExtratoPorTipo(tipoTransacao: String): List<Transacao>{
+    private fun geraExtratoPorTipo(tipoTransacao: String): List<TransacaoDto>{
         return extratoController.geraExtratoPorTipo(tipoTransacao)
     }
 }

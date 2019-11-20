@@ -11,6 +11,7 @@ import br.edu.ifsp.scl.controlefinanceiro.R
 import br.edu.ifsp.scl.controlefinanceiro.adapter.ExtratoAdapter
 import br.edu.ifsp.scl.controlefinanceiro.controller.ContaController
 import br.edu.ifsp.scl.controlefinanceiro.controller.ExtratoController
+import br.edu.ifsp.scl.controlefinanceiro.dto.TransacaoDto
 import br.edu.ifsp.scl.controlefinanceiro.model.Transacao
 import kotlinx.android.synthetic.main.extrato_por_conta.*
 import kotlinx.android.synthetic.main.layout_comum_extrato.*
@@ -59,7 +60,7 @@ class ExtratoPorConta : AppCompatActivity() {
                     view,
                     mYear,
                     mMonth,
-                    mDay -> btnDataIni.text = "" + (if (mDay < 10) "0" + mDay else mDay) + "/" + (if (mMonth < 10) "0" + (mMonth+1) else (mMonth+1)) + "/" + mYear }, day, month, year)
+                    mDay -> btnDataIni.text = "" + mYear + "-" + (if (mMonth < 9) "0" + (mMonth+1) else (mMonth+1)) + "-" + (if (mDay < 10) "0" + mDay else mDay)}, year, month, day)
 
             dpIni.show()
         }
@@ -71,7 +72,7 @@ class ExtratoPorConta : AppCompatActivity() {
                     view,
                     mYear,
                     mMonth,
-                    mDay -> btnDataFim.text = "" + (if (mDay < 10) "0" + mDay else mDay) + "/" + (if (mMonth < 10) "0" + (mMonth+1) else (mMonth+1)) + "/" + mYear }, day, month, year)
+                    mDay -> btnDataFim.text = "" + mYear + "-" + (if (mMonth < 9) "0" + (mMonth+1) else (mMonth+1)) + "-" + (if (mDay < 10) "0" + mDay else mDay)}, year, month, day)
 
             dpFim.show()
         }
@@ -97,7 +98,7 @@ class ExtratoPorConta : AppCompatActivity() {
     lateinit var contaController: ContaController
     lateinit var extratoController: ExtratoController
 
-    private fun geraExtratoPorConta(idConta: Long, dataIni: String, dataFim: String): List<Transacao>{
-        return extratoController.geraExtratoPorConta(idConta, dataIni, dataFim)
+    private fun geraExtratoPorConta(idConta: Long, dataIni: String, dataFim: String): List<TransacaoDto>{
+        return extratoController.geraExtratoPorConta(idConta, dataIni)
     }
 }

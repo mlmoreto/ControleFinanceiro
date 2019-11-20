@@ -65,14 +65,16 @@
             android:layout_height="wrap_content" />
 
     <RadioButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Única"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Única"
+            android:textSize="12sp" />
 
     <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Repete"/>
+            android:text="Repete"
+            android:textSize="12sp" />
 
     <TextView
             android:layout_width="wrap_content"

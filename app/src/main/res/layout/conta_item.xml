@@ -8,7 +8,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="410dp"
+            android:layout_width="413dp"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
@@ -18,11 +18,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:text="Conta:"
+                android:textAlignment="viewStart"
                 android:textColor="#F8F9FA"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/txtSaldo"
-                app:layout_constraintHorizontal_bias="0.098"
+                app:layout_constraintHorizontal_bias="0.142"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteY="0dp" />
@@ -31,14 +32,15 @@
                 android:id="@+id/txtSaldo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:layout_marginEnd="64dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="16dp"
                 android:text="Saldo:"
+                android:textAlignment="viewStart"
                 android:textColor="#F8F9FA"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.684"
+                app:layout_constraintHorizontal_bias="0.77"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteY="0dp" />
