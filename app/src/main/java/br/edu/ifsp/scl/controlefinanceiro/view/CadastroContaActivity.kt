@@ -29,17 +29,49 @@ class CadastroContaActivity : AppCompatActivity() {
 
     // Insere a conta, passando como parametro a descricao e saldo informados pelo usuario
     private fun insereConta() {
-        val descricao = (findViewById(R.id.editTextDesc) as EditText).getText().toString()
-        val saldo = (findViewById(R.id.editTextSaldo) as EditText).getText().toString()
 
-        val conta = Conta(0, descricao, saldo.toFloat())
-        contaController.insereConta(conta)
+        // Tratativas para não permitir campos em brancos:
+        if ((findViewById(R.id.editTextDesc) as EditText).getText().toString() == null || (findViewById(R.id.editTextDesc) as EditText).getText().toString() == ""){
+            Toast.makeText(getApplicationContext(), "Informe o nome da conta, por favor.", Toast.LENGTH_LONG).show()
+        }else {
+            if ((findViewById(R.id.editTextSaldo) as EditText).getText().toString() == null || (findViewById(
+                    R.id.editTextSaldo
+                ) as EditText).getText().toString() == ""
+            ) {
+                Toast.makeText(
+                    getApplicationContext(),
+                    "Informe o saldo da conta, por favor.",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
 
-        Toast.makeText(getApplicationContext(), "Conta cadastrada com sucesso!", Toast.LENGTH_LONG).show()
+                // Captura os dados digitados na tela e insere a conta no banco de dados:
+                val descricao = (findViewById(R.id.editTextDesc) as EditText).getText().toString()
+                val saldo = (findViewById(R.id.editTextSaldo) as EditText).getText().toString()
 
-        //setContentView(R.layout.lista_contas)
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+                if (saldo.replace(',', '.').toFloat() <= 0){
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "Informe um saldo maior que R$0,00, por favor.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }else {
+                    // Substitui a virgula pelo ponto para ser armazenado como Float
+                    val conta = Conta(0, descricao, saldo.replace(',', '.').toFloat())
+                    contaController.insereConta(conta)
+
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "Conta cadastrada com sucesso!",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    //setContentView(R.layout.lista_contas)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

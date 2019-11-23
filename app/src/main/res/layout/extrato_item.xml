@@ -7,8 +7,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="#EBE7B9F1"
+        android:layout_marginBottom="4dp"
+        app:cardBackgroundColor="#DCB3EE"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="true"
@@ -17,117 +17,129 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="106dp">
 
         <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/txtContaTransac"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
-                android:text="Valor:"
-                android:textColor="#030303"
+                android:text="Conta"
+                android:textColor="#7C0EA3"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
-                app:layout_constraintVertical_bias="0.75" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
 
         <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="8dp"
                 android:text="Data:"
                 android:textColor="#030303"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView8"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.319" />
 
         <TextView
-                android:id="@+id/txtValorTransac"
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtDescTransac"
-                android:layout_marginStart="72dp"
-                android:layout_marginEnd="100dp"
-                android:text="Valor"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Valor:"
                 android:textColor="#030303"
-                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.169"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/txtDescTransac"
-                app:layout_constraintVertical_bias="0.272"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.967" />
 
         <TextView
                 android:id="@+id/txtDescTransac"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtData"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="100dp"
                 android:paddingLeft="16dp"
                 android:text="Descrição"
                 android:textColor="#030303"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.424"
+                app:layout_constraintBottom_toTopOf="@+id/txtValorTransac"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/txtData"
+                tools:ignore="MissingConstraints" />
+
+        <TextView
+                android:id="@+id/txtValorTransac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDescTransac"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="15dp"
+                android:text="Valor"
+                android:textColor="#030303"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintTop_toBottomOf="@+id/txtDescTransac"
+                app:layout_constraintVertical_bias="0.333"
                 tools:ignore="MissingConstraints" />
 
         <TextView
                 android:id="@+id/txtData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="8dp"
                 android:text="Data"
                 android:textColor="#030303"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="213dp"
-                tools:layout_editor_absoluteY="43dp" />
+                app:layout_constraintBottom_toTopOf="@+id/txtDescTransac"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.825"
+                tools:ignore="MissingConstraints" />
 
         <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Descrição:"
                 android:textColor="#030303"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView9"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.638" />
 
         <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="82dp"
-                android:layout_height="101dp"
-                app:srcCompat="@drawable/operacao"
-                tools:ignore="MissingConstraints" />
-
-        <TextView
-                android:id="@+id/txtContaTransac"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:text="Conta"
-                android:textColor="#080809"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                android:layout_width="77dp"
+                android:layout_height="97dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="92dp"
+                app:srcCompat="@drawable/operacao"
                 tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

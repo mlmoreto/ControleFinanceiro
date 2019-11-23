@@ -5,6 +5,7 @@ package br.edu.ifsp.scl.controlefinanceiro.dto
 * */
 
 data class TransacaoDto (
+  var conta: String = "",
   var descricao: String = "",
   var data: String = "",
   var valor: Float = 0F

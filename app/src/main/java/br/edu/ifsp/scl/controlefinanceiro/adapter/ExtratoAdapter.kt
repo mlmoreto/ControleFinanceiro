@@ -27,14 +27,15 @@ class ExtratoAdapter(private val transacoes: List<TransacaoDto>,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val transacao = transacoes[position]
         holder.let {
+            it.conta.text = transacao.conta
             it.descricao.text = transacao.descricao
             it.data.text = transacao.data
             it.valor.text = transacao.valor.toString()
         }
-
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val conta = itemView.txtContaTransac
         val descricao = itemView.txtDescTransac
         val data = itemView.txtData
         val valor = itemView.txtValorTransac

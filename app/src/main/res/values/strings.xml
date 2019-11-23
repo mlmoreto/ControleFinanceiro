@@ -6,4 +6,16 @@
     <string name="tbContas">Contas</string>
     <string name="tbExtratos">Extratos</string>
     <string name="tbCadTransac">Cadastrar Transação</string>
+    <string-array name="tiposTransac">
+        <item>Alimentação</item>
+        <item>Saúde</item>
+        <item>Moradia</item>
+        <item>Educação</item>
+        <item>Lazer</item>
+        <item>Tarifas Bancárias</item>
+        <item>Luz</item>
+        <item>Água</item>
+        <item>Telefone</item>
+        <item>Outro</item>
+    </string-array>
 </resources>

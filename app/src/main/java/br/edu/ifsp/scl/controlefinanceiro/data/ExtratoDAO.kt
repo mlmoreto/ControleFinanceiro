@@ -47,6 +47,7 @@ class ExtratoDAO(context: Context) {
         return transacoes
     }
 
+    // Retorna todas as transações pelo filtro natureza, ordenando pela data
     fun geraExtratoPorNatureza(natureza: String): List<TransacaoDto>{
         database = dbHelper!!.getReadableDatabase()
 
@@ -54,13 +55,21 @@ class ExtratoDAO(context: Context) {
 
         val cursor: Cursor
 
-        cursor = database!!.rawQuery("SELECT descricao, strftime('%d/%m/%Y', data) as data, valor FROM " + SQLiteHelper.TABLE_TRANSACAO + " WHERE natureza = '" + natureza + "';", null)
+        cursor = database!!.rawQuery("SELECT conta.descricao, " +
+                                               " transacao.descricao, " +
+                                               " strftime('%d/%m/%Y', data) as data, " +
+                                               " valor " +
+                                        " FROM transacao " +
+                                        " INNER JOIN conta ON conta.id_conta = transacao.id_conta" +
+                                       " WHERE natureza = '" + natureza + "'" +
+                                       " ORDER BY data DESC;", null)
 
         while (cursor.moveToNext()) {
             val t = TransacaoDto()
-            t.descricao = cursor.getString(0)
-            t.data = cursor.getString(1)
-            t.valor = cursor.getFloat(2)
+            t.conta = cursor.getString(0)
+            t.descricao = cursor.getString(1)
+            t.data = cursor.getString(2)
+            t.valor = cursor.getFloat(3)
             transacoes.add(t)
         }
 
@@ -70,6 +79,7 @@ class ExtratoDAO(context: Context) {
         return transacoes
     }
 
+    // Retorna todas as transacoes filtrando pelo tipo, ordenando pela data
     fun geraExtratoPorTipo(tipo: String): List<TransacaoDto>{
         database = dbHelper!!.getReadableDatabase()
 
@@ -77,13 +87,21 @@ class ExtratoDAO(context: Context) {
 
         val cursor: Cursor
 
-        cursor = database!!.rawQuery("SELECT descricao, strftime('%d/%m/%Y', data) as data, valor FROM " + SQLiteHelper.TABLE_TRANSACAO + " WHERE tipo = '" + tipo + "';", null)
+        cursor = database!!.rawQuery("SELECT conta.descricao, " +
+                                                " transacao.descricao, " +
+                                                " strftime('%d/%m/%Y', data) as data, " +
+                                                " valor " +
+                                           " FROM transacao " +
+                                          " INNER JOIN conta ON conta.id_conta = transacao.id_conta" +
+                                          " WHERE tipo = '" + tipo + "'" +
+                                          " ORDER BY data DESC;", null)
 
         while (cursor.moveToNext()) {
             val t = TransacaoDto()
-            t.descricao = cursor.getString(0)
-            t.data = cursor.getString(1)
-            t.valor = cursor.getFloat(2)
+            t.conta = cursor.getString(0)
+            t.descricao = cursor.getString(1)
+            t.data = cursor.getString(2)
+            t.valor = cursor.getFloat(3)
             transacoes.add(t)
         }
 

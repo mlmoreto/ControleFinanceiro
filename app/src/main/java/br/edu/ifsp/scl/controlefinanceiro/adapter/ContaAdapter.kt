@@ -29,20 +29,11 @@ class ContaAdapter(private val contas: List<Conta>,
             it.descricao.text = conta.descricao
             it.saldo.text = conta.saldo.toString()
         }
-
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val descricao = itemView.txtDescricao
         val saldo = itemView.txtSaldo
-
-        /*fun bindView(conta: Conta){
-            val descricao = itemView.txtDescricao
-            val saldo = itemView.txtSaldo
-
-            descricao.text = conta.descricao
-            saldo.text = conta.saldo.toString()
-        }*/
     }
 
 }

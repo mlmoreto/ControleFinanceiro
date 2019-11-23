@@ -23,7 +23,7 @@ class ExtratoPorTipo : AppCompatActivity() {
         extratoController = ExtratoController(this)
 
         // Tipos de transacao:
-        var tiposTransacao = arrayListOf("Alimentação", "Saúde", "Transporte", "Moradia", "Educação", "Lazer", "Tarifas Bancárias", "Luz", "Água", "Telefone")
+        var tiposTransacao = getResources().getStringArray(R.array.tiposTransac)
         var tipoTransacao = ""
 
         // Seta as transacoes no spinner de transacoes

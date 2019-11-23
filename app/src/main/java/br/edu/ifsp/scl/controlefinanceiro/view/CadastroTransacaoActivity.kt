@@ -40,7 +40,7 @@ class CadastroTransacaoActivity : AppCompatActivity() {
         }
 
         // Tipos de transacao:
-        var tiposTransacao = arrayListOf("Alimentação", "Saúde", "Transporte", "Moradia", "Educação", "Lazer", "Tarifas Bancárias", "Luz", "Água", "Telefone")
+        var tiposTransacao = getResources().getStringArray(R.array.tiposTransac)
         var tipoTransacao = ""
 
         // Seta as transacoes no spinner de transacoes
@@ -74,9 +74,10 @@ class CadastroTransacaoActivity : AppCompatActivity() {
 
         // Fazer tratativa do valor
         if (natureza == "Débito")
-            valorTransac = valor.toFloat() * (-1)
+            // Primeiro substitui a virgula pelo ponto para ser armazenado em Float
+            valorTransac = valor.replace(',', '.').toFloat() * (-1)
         else
-            valorTransac = valor.toFloat()
+            valorTransac = valor.replace(',', '.').toFloat()
 
         val transacao = Transacao(0, descricao, idConta, valorTransac, natureza, tipoTransacao)
 
