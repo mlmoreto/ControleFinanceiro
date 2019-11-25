@@ -12,7 +12,7 @@ class ExtratoDAO(context: Context) {
     internal var database: SQLiteDatabase? = null
     internal var dbHelper: SQLiteHelper? = null
 
-    val transacao = Transacao()
+    lateinit var transacao: Transacao
     val transacaoDto = TransacaoDto()
 
     init {

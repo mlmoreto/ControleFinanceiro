@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.CadastroTransacaoActivity">
+        <activity android:name=".view.CadastroTransacaoActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>

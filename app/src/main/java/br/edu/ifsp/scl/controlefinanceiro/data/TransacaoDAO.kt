@@ -12,7 +12,7 @@ class TransacaoDAO (context: Context){
 
     internal var database: SQLiteDatabase? = null
     internal var dbHelper: SQLiteHelper? = null
-    val transacao = Transacao()
+    lateinit var transacao: Transacao
 
     init {
         this.dbHelper = SQLiteHelper(context)
@@ -24,6 +24,7 @@ class TransacaoDAO (context: Context){
 
         val values = ContentValues()
         values.put(SQLiteHelper.KEY_DESCRICAO, t.descricao)
+        values.put(SQLiteHelper.KEY_DATA_TRANSAC, t.data)
         values.put(SQLiteHelper.KEY_ID_CONTA, t.idConta)
         values.put(SQLiteHelper.KEY_VALOR_TRANSAC, t.valor)
         values.put(SQLiteHelper.KEY_NATUREZA, t.natureza)
@@ -35,7 +36,7 @@ class TransacaoDAO (context: Context){
         return id
     }
 
-    fun atualizaSaldoConta(valor: Float, idConta: Long, natureza: String) {
+    fun atualizaSaldoConta(valor: Float, idConta: Long) {
         database = dbHelper!!.getWritableDatabase()
 
         /*if (natureza == "Débito") // Se for Débito, então subtrai
