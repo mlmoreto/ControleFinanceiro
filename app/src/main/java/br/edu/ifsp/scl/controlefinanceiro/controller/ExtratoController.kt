@@ -13,8 +13,8 @@ class ExtratoController(val activity: Activity) {
         extratoDAO = ExtratoDAO(activity)
     }
 
-    fun geraExtratoPorConta(idConta: Long, dataIni: String): List<TransacaoDto>{
-        return extratoDAO.geraExtratoPorConta(idConta, dataIni)
+    fun geraExtratoPorConta(idConta: Long, data: String): List<TransacaoDto>{
+        return extratoDAO.geraExtratoPorConta(idConta, data)
     }
 
     fun geraExtratoPorNatureza(natureza: String): List<TransacaoDto>{

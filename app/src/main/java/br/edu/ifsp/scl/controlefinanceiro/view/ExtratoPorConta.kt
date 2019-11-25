@@ -50,8 +50,7 @@ class ExtratoPorConta : AppCompatActivity() {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-        var dataIni = ""
-        var dataFim = ""
+        var data = ""
 
         // Captura a data ini da consulta
         btnDataIni.setOnClickListener {
@@ -65,28 +64,15 @@ class ExtratoPorConta : AppCompatActivity() {
             dpIni.show()
         }
 
-        // Captura a data fim
-        btnDataFim.setOnClickListener {
-
-            val dpFim = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{
-                    view,
-                    mYear,
-                    mMonth,
-                    mDay -> btnDataFim.text = "" + mYear + "-" + (if (mMonth < 9) "0" + (mMonth+1) else (mMonth+1)) + "-" + (if (mDay < 10) "0" + mDay else mDay)}, year, month, day)
-
-            dpFim.show()
-        }
-
         // Gera o extrato, solicitando as datas ini e fim, populando o recycler view
         btnGerarExt.setOnClickListener {
 
             // Salva as datas:
-            dataIni = btnDataIni.text.toString()
-            dataFim = btnDataFim.text.toString()
+            data = btnDataIni.text.toString()
 
             // Inserindo todas as contas na recycler view
             val recyclerView = rvExtrato
-            recyclerView.adapter = ExtratoAdapter(geraExtratoPorConta(idConta, dataIni, dataFim), this)
+            recyclerView.adapter = ExtratoAdapter(geraExtratoPorConta(idConta, data), this)
 
             // LinearLayout eh o gerenciador:
             val layout = LinearLayoutManager(this)
@@ -98,7 +84,7 @@ class ExtratoPorConta : AppCompatActivity() {
     lateinit var contaController: ContaController
     lateinit var extratoController: ExtratoController
 
-    private fun geraExtratoPorConta(idConta: Long, dataIni: String, dataFim: String): List<TransacaoDto>{
-        return extratoController.geraExtratoPorConta(idConta, dataIni)
+    private fun geraExtratoPorConta(idConta: Long, data: String): List<TransacaoDto>{
+        return extratoController.geraExtratoPorConta(idConta, data)
     }
 }

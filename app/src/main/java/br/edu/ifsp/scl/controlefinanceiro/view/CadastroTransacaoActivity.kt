@@ -35,6 +35,10 @@ class CadastroTransacaoActivity : AppCompatActivity() {
         var day = c.get(Calendar.DAY_OF_MONTH)
         c.set(year, month, day)
 
+        var diaSelecionado = 0
+        var mesSelecionado = 0
+        var anoSelecionado = 0
+
         // Captura a data ini da consulta
         btnData.setOnClickListener {
 
@@ -43,10 +47,14 @@ class CadastroTransacaoActivity : AppCompatActivity() {
                                                                                     mMonth,
                                                                                     mDay ->
                 editTextData.setText("" + mYear + "-" + (if (mMonth < 9) "0" + (mMonth + 1) else (mMonth + 1)) + "-" + (if (mDay < 10) "0" + mDay else mDay))
+                diaSelecionado = mDay
+                mesSelecionado = mMonth
+                anoSelecionado = mYear
             }, year, month, day)
 
             dpIni.show()
         }
+
 
         // Busca as contas para preenchimento do spinner
         var listaContas = contaController.buscaTodas()
@@ -101,14 +109,20 @@ class CadastroTransacaoActivity : AppCompatActivity() {
 
         switchRepetir.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                editTextQtd.setEnabled(true)
+                //editTextQtd.setEnabled(true)
+                spinnerPeriodo.setVisibility(View.VISIBLE)
+                txtQtdVezes.setVisibility(View.VISIBLE)
+                editTextQtd.setVisibility(View.VISIBLE)
             } else {
-                editTextQtd.setEnabled(false)
+               // editTextQtd.setEnabled(false)
+                spinnerPeriodo.setVisibility(View.INVISIBLE)
+                txtQtdVezes.setVisibility(View.INVISIBLE)
+                editTextQtd.setVisibility(View.INVISIBLE)
             }
         }
 
-        btnCreditar.setOnClickListener { insereTransacao(idConta, periodo, year, month, day, "Crédito", tipoTransacao) }
-        btnDebitar.setOnClickListener { insereTransacao(idConta, periodo, year, month, day, "Débito", tipoTransacao) }
+        btnCreditar.setOnClickListener { insereTransacao(idConta, periodo, anoSelecionado, mesSelecionado, diaSelecionado, "Crédito", tipoTransacao) }
+        btnDebitar.setOnClickListener { insereTransacao(idConta, periodo, anoSelecionado, mesSelecionado, diaSelecionado, "Débito", tipoTransacao) }
     }
 
     lateinit var contaController: ContaController
@@ -147,7 +161,7 @@ class CadastroTransacaoActivity : AppCompatActivity() {
             when(periodo){
                 "Diário" ->
                     //Loop de quantidade somando 1 aos dias:
-                    for (i in 0..quantidade){
+                    for (i in 0..(quantidade-1)){
                         data = ""+ ano + "-" + mes  + "-" + (dia + i)
 
                         val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
@@ -155,21 +169,24 @@ class CadastroTransacaoActivity : AppCompatActivity() {
                     }
                 "Semanal" ->
                     // Loop de quantidade somando 7 aos dias:
-                    for (i in 0..quantidade){
+                    for (i in 0..(quantidade-1)){
                         data = ""+ ano + "-" + mes  + "-" + (dia + 7)
                         val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
                         id = transacaoController.insereTransacao(transacao)
                     }
                 "Mensal" ->
                     // Loop de quantidade somando 1 ao mes:
-                    for (i in 0..quantidade){
-                        data = ""+ ano + "-" + (mes + i)  + "-" + dia
+                    for (i in 0..(quantidade-1)){
+                        /*if (mes == 12) {
+                            mes = 0;
+                        }*/
+                        data = "" + ano + "-" + (mes + i) + "-" + dia
                         val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
                         id = transacaoController.insereTransacao(transacao)
                     }
                 "Anual" ->
                     // Loop de quantidade somando 1 ao ano:
-                    for (i in 0..quantidade){
+                    for (i in 0..(quantidade-1)){
                         data = ""+ (ano + i)  + "-" + mes + "-" + dia
                         val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
                         id = transacaoController.insereTransacao(transacao)

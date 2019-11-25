@@ -19,16 +19,17 @@ class ExtratoDAO(context: Context) {
         this.dbHelper = SQLiteHelper(context)
     }
 
-    fun geraExtratoPorConta(idConta: Long, dataIni: String): List<TransacaoDto> {
+    fun geraExtratoPorConta(idConta: Long, data: String): List<TransacaoDto> {
         database = dbHelper!!.getReadableDatabase()
 
         val transacoes = mutableListOf(transacaoDto)
 
         val cursor: Cursor
 
-        var sql = "SELECT descricao, strftime('%d/%m/%Y', data) as data, valor FROM " + SQLiteHelper.TABLE_TRANSACAO +
+        var sql = "SELECT descricao, data, valor FROM " + SQLiteHelper.TABLE_TRANSACAO +
                         " WHERE id_conta = " + idConta +
-                          " AND strftime('%Y/%m/%d', data) >= " + dataIni + " ;"
+                        " AND data = '" + data + "';"
+                          //" AND strftime('%Y/%m/%d', data) >= " + dataIni + " ;"
                           //" AND strftime('%Y/%m/%d', data) <= " + dataFim + " ;"
 
         cursor = database!!.rawQuery(sql, null)
@@ -57,7 +58,8 @@ class ExtratoDAO(context: Context) {
 
         cursor = database!!.rawQuery("SELECT conta.descricao, " +
                                                " transacao.descricao, " +
-                                               " strftime('%d/%m/%Y', data) as data, " +
+                                               //" strftime('%d/%m/%Y', data) as data, " +
+                                               " data, " +
                                                " valor " +
                                         " FROM transacao " +
                                         " INNER JOIN conta ON conta.id_conta = transacao.id_conta" +
@@ -89,7 +91,7 @@ class ExtratoDAO(context: Context) {
 
         cursor = database!!.rawQuery("SELECT conta.descricao, " +
                                                 " transacao.descricao, " +
-                                                " strftime('%d/%m/%Y', data) as data, " +
+                                                " data, " +
                                                 " valor " +
                                            " FROM transacao " +
                                           " INNER JOIN conta ON conta.id_conta = transacao.id_conta" +
