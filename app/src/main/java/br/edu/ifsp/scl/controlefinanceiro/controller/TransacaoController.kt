@@ -15,7 +15,7 @@ class TransacaoController(val activity: Activity) {
         val id = transacaoDAO.incluirTransacao(transacao)
 
         // Faz a alteracao do saldo da conta corrente de acordo com a natureza da operacao: soma se for Credito, subtrai se for Debito
-        transacaoDAO.atualizaSaldoConta(transacao.valor, transacao.idConta)
+        //transacaoDAO.atualizaSaldoConta(transacao.valor, transacao.idConta)
 
         return id
     }

@@ -36,10 +36,5 @@ class TransacaoDAO (context: Context){
         return id
     }
 
-    fun atualizaSaldoConta(valor: Float, idConta: Long) {
-        database = dbHelper!!.getWritableDatabase()
-
-        database!!.execSQL("UPDATE " + SQLiteHelper.TABLE_CONTA + " SET saldo = saldo + " + valor + " WHERE id_conta = " + idConta)
-    }
 
 }

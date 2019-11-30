@@ -56,17 +56,18 @@ internal class SQLiteHelper(@Nullable context: Context) : SQLiteOpenHelper(conte
         val KEY_VALOR_TRANSAC = "valor"
         val KEY_NATUREZA      = "natureza" // credito ou debito
         val KEY_TIPO_TRANSAC  = "tipo" // transporte, moradia, alimentacao etc...
+        val KEY_CALCULOU_CONTA = "transac_calculada"
 
 
         private val CREATE_TABLE_TRANSAC = ("CREATE TABLE IF NOT EXISTS " + TABLE_TRANSACAO + " ("
                 + KEY_ID_TRANSAC + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + KEY_DESC_TRANSAC + " TEXT, "
-                //+ KEY_DATA_TRANSAC + " DATE DEFAULT (DATETIME('now')), "
                 + KEY_DATA_TRANSAC + " TEXT, "
                 + KEY_ID_CONTA + " INTEGER, "
                 + KEY_VALOR_TRANSAC + " REAL, "
                 + KEY_NATUREZA + " TEXT, "
-                + KEY_TIPO_TRANSAC + " TEXT);")
+                + KEY_TIPO_TRANSAC + " TEXT, "
+                + KEY_CALCULOU_CONTA + " INTEGER DEFAULT 0);")
                 //" FOREIGN KEY("+ KEY_ID_CONTA +") REFERENCES " + CREATE_TABLE + "("+ KEY_ID +");")
     }
 

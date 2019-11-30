@@ -26,6 +26,7 @@ class ContaController(val activity: Activity) {
     }
 
     fun buscaTodas(): List<Conta> {
+        contaDAO.calculaSaldoAtual()
         return contaDAO.listaContas()
     }
 

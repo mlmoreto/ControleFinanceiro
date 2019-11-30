@@ -78,14 +78,13 @@ class CadastroContaActivity : AppCompatActivity() {
         val id = item.getItemId()
 
         if (id == R.id.btnSalvarConta){
-            val dao = ContaDAO(this)
 
             val descricao = (findViewById(R.id.editTextDesc) as EditText).getText().toString()
             val saldo = (findViewById(R.id.editTextSaldo) as EditText).getText().toString()
 
             val c = Conta()
 
-            val idConta = dao.incluirConta(c) as Long
+            val idConta = contaController.insereConta(c) as Long
             c.idConta = idConta
 
             //MainActivity.adapter.adicionaContatoAdapter(c)
