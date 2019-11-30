@@ -39,12 +39,6 @@ class TransacaoDAO (context: Context){
     fun atualizaSaldoConta(valor: Float, idConta: Long) {
         database = dbHelper!!.getWritableDatabase()
 
-        /*if (natureza == "Débito") // Se for Débito, então subtrai
-            database!!.execSQL("UPDATE " + SQLiteHelper.TABLE_CONTA + " SET saldo = saldo - " + valor + " WHERE id_conta = " + idConta)
-        else// Se não, soma o valor ao saldo
-            database!!.execSQL("UPDATE " + SQLiteHelper.TABLE_CONTA + " SET saldo = saldo + " + valor + " WHERE id_conta = " + idConta)
-        */
-
         database!!.execSQL("UPDATE " + SQLiteHelper.TABLE_CONTA + " SET saldo = saldo + " + valor + " WHERE id_conta = " + idConta)
     }
 

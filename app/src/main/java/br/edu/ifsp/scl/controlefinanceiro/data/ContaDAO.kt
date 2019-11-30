@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import br.edu.ifsp.scl.controlefinanceiro.model.Conta
+import java.math.BigDecimal
 
 
 class ContaDAO(context: Context) {
@@ -20,7 +21,6 @@ class ContaDAO(context: Context) {
     fun listaContas(): List<Conta> {
         database = dbHelper!!.getReadableDatabase()
 
-
         val contas = mutableListOf(conta)
 
         val cursor: Cursor
@@ -28,6 +28,9 @@ class ContaDAO(context: Context) {
         cursor = database!!.query(SQLiteHelper.TABLE_CONTA, null, null,
             null, null, null,
             SQLiteHelper.KEY_DESCRICAO)
+
+        // Removo o item 0 devido estar inicializando os atributos
+        contas.removeAt(0)
 
         while (cursor.moveToNext()) {
             val c = Conta()
@@ -90,14 +93,14 @@ class ContaDAO(context: Context) {
 
         cursor = database!!.rawQuery("SELECT SUM(saldo) AS Total FROM " + SQLiteHelper.TABLE_CONTA + ";", null)
 
-        var saldoTotal = 0
+        var saldoTotal = 0F
 
         if (cursor.moveToFirst()) {
 
-            saldoTotal = cursor.getInt(cursor.getColumnIndex("Total"))
+            saldoTotal = cursor.getFloat(0)
 
         }
-        return saldoTotal.toFloat()
+        return saldoTotal
     }
 
 }

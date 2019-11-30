@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
+import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.edu.ifsp.scl.controlefinanceiro.R
 import br.edu.ifsp.scl.controlefinanceiro.adapter.ExtratoAdapter
@@ -56,7 +59,7 @@ class ExtratoPorConta : AppCompatActivity() {
         btnDataIni.setOnClickListener {
 
             val dpIni = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{
-                    view,
+                    _,
                     mYear,
                     mMonth,
                     mDay -> btnDataIni.text = "" + mYear + "-" + (if (mMonth < 9) "0" + (mMonth+1) else (mMonth+1)) + "-" + (if (mDay < 10) "0" + mDay else mDay)}, year, month, day)
@@ -64,7 +67,7 @@ class ExtratoPorConta : AppCompatActivity() {
             dpIni.show()
         }
 
-        // Gera o extrato, solicitando as datas ini e fim, populando o recycler view
+        // Gera o extrato, populando o recycler view
         btnGerarExt.setOnClickListener {
 
             // Salva as datas:

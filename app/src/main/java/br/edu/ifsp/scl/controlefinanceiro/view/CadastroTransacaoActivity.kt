@@ -39,7 +39,7 @@ class CadastroTransacaoActivity : AppCompatActivity() {
         var mesSelecionado = 0
         var anoSelecionado = 0
 
-        // Captura a data ini da consulta
+        // Captura a data de busca da transacao
         btnData.setOnClickListener {
 
             val dpIni = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _,
@@ -107,105 +107,235 @@ class CadastroTransacaoActivity : AppCompatActivity() {
             }
         }
 
+        var repete: Boolean = false
+
+        // Caso tenha selecionado ou não o switch
         switchRepetir.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                //editTextQtd.setEnabled(true)
                 spinnerPeriodo.setVisibility(View.VISIBLE)
                 txtQtdVezes.setVisibility(View.VISIBLE)
                 editTextQtd.setVisibility(View.VISIBLE)
+                repete = true
             } else {
-               // editTextQtd.setEnabled(false)
                 spinnerPeriodo.setVisibility(View.INVISIBLE)
                 txtQtdVezes.setVisibility(View.INVISIBLE)
                 editTextQtd.setVisibility(View.INVISIBLE)
+                repete = false
             }
         }
 
-        btnCreditar.setOnClickListener { insereTransacao(idConta, periodo, anoSelecionado, mesSelecionado, diaSelecionado, "Crédito", tipoTransacao) }
-        btnDebitar.setOnClickListener { insereTransacao(idConta, periodo, anoSelecionado, mesSelecionado, diaSelecionado, "Débito", tipoTransacao) }
+        btnCreditar.setOnClickListener { insereTransacao(idConta, periodo, anoSelecionado, mesSelecionado, diaSelecionado, "Crédito", tipoTransacao, repete) }
+        btnDebitar.setOnClickListener { insereTransacao(idConta, periodo, anoSelecionado, mesSelecionado, diaSelecionado, "Débito", tipoTransacao, repete) }
     }
 
     lateinit var contaController: ContaController
     lateinit var transacaoController: TransacaoController
 
     // Insere a transacao
-    private fun insereTransacao(idConta: Long, periodo:String, year: Int, month: Int, day: Int, natureza: String, tipoTransacao: String) {
+    private fun insereTransacao(idConta: Long, periodo:String, year: Int, month: Int, day: Int, natureza: String, tipoTransacao: String, repete: Boolean) {
 
-        val descricao = (findViewById(R.id.editTextDescTrans) as EditText).getText().toString()
-        //var data = (findViewById(R.id.editTextData) as EditText).getText().toString()
-        var data = ""
-        //var dataCalculada: Date
-        val quantidade = (findViewById(R.id.editTextQtd) as EditText).getText().toString().toInt()
+        var descricao = ""
+        var data: String
+        var quantidade = 0
+        var valor = ""
 
-        val valor = (findViewById(R.id.editTextValor) as EditText).getText().toString()
+        // Trativas dos campos:
 
-        var valorTransac: Float
+        // Verifica se a descrição foi preenchida
+        if ((findViewById(R.id.editTextDescTrans) as EditText).getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "Informe a descrição da transação, por favor.", Toast.LENGTH_LONG).show()
+        }else{
+            descricao = (findViewById(R.id.editTextDescTrans) as EditText).getText().toString()
 
-        // Fazer tratativa do valor
-        if (natureza == "Débito")
-            // Primeiro substitui a virgula pelo ponto para ser armazenado em Float
-            valorTransac = valor.replace(',', '.').toFloat() * (-1)
-        else
-            valorTransac = valor.replace(',', '.').toFloat()
+            // Verifica se foi selecionada uma data
+            if ((findViewById(R.id.editTextData) as EditText).getText().toString().isEmpty()){
+                Toast.makeText(getApplicationContext(), "Informe a data da transação, por favor.", Toast.LENGTH_LONG).show()
+            }else {
 
-        var id = 0L
+                if (idConta == 0L){
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "Selecione a conta, por favor.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }else{
 
-        var dia = day
-        // Meses são de 0 a 11
-        var mes = month + 1
-        var ano = year
+                    // Verifica se o valor foi informado
+                    if ((findViewById(R.id.editTextValor) as EditText).getText().toString().isEmpty()) {
+                        Toast.makeText(
+                            getApplicationContext(),
+                            "Informe o valor da transação, por favor.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        valor = (findViewById(R.id.editTextValor) as EditText).getText().toString()
 
-        // Se selecionou repeticao para varias transacoes
-        if (quantidade > 0){
+                        // Se selecionou para repetir
+                        if (repete) {
+                            if ((findViewById(R.id.editTextQtd) as EditText).getText().toString().isEmpty()) {
+                                Toast.makeText(
+                                    getApplicationContext(),
+                                    "Informe a quantidade, por favor.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else {
+                                quantidade =
+                                    (findViewById(R.id.editTextQtd) as EditText).getText()
+                                        .toString()
+                                        .toInt()
+                            }
+                        }
 
-            when(periodo){
-                "Diário" ->
-                    //Loop de quantidade somando 1 aos dias:
-                    for (i in 0..(quantidade-1)){
-                        data = ""+ ano + "-" + mes  + "-" + (dia + i)
+                        var valorTransac: Float
 
-                        val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
-                        id = transacaoController.insereTransacao(transacao)
+                        // Fazer tratativa do valor
+                        if (natureza == "Débito")
+                        // Primeiro substitui a virgula pelo ponto para ser armazenado em Float
+                            valorTransac = valor.replace(',', '.').toFloat() * (-1)
+                        else
+                            valorTransac = valor.replace(',', '.').toFloat()
+
+                        var id = 0L
+
+                        var dia = day
+                        // Meses são de 0 a 11, então somei +1 para que janeiro seja = 1
+                        var mes = month + 1
+                        var ano = year
+
+                        // Se selecionou repeticao para varias transacoes
+                        if (repete && quantidade > 0) {
+
+                            when (periodo) {
+                                "Diário" ->
+                                    //Loop de quantidade somando 1 aos dias:
+                                    for (i in 0..(quantidade - 1)) {
+                                        data = "" + ano + "-" + mes + "-" + (dia + i)
+
+                                        val transacao = Transacao(
+                                            0,
+                                            descricao,
+                                            data,
+                                            idConta,
+                                            valorTransac,
+                                            natureza,
+                                            tipoTransacao
+                                        )
+                                        id = transacaoController.insereTransacao(transacao)
+                                    }
+                                "Semanal" ->
+                                    // Loop de quantidade somando 7 aos dias:
+                                    for (i in 0..(quantidade - 1)) {
+                                        data = "" + ano + "-" + mes + "-" + (dia + 7)
+                                        val transacao = Transacao(
+                                            0,
+                                            descricao,
+                                            data,
+                                            idConta,
+                                            valorTransac,
+                                            natureza,
+                                            tipoTransacao
+                                        )
+                                        id = transacaoController.insereTransacao(transacao)
+                                    }
+                                "Mensal" ->
+                                    // Loop de quantidade somando 1 ao mes:
+                                    for (i in 0..(quantidade - 1)) {
+                                        data = "" + ano + "-" + (mes + i) + "-" + dia
+                                        val transacao = Transacao(
+                                            0,
+                                            descricao,
+                                            data,
+                                            idConta,
+                                            valorTransac,
+                                            natureza,
+                                            tipoTransacao
+                                        )
+                                        id = transacaoController.insereTransacao(transacao)
+                                    }
+                                "Anual" ->
+                                    // Loop de quantidade somando 1 ao ano:
+                                    for (i in 0..(quantidade - 1)) {
+                                        data = "" + (ano + i) + "-" + mes + "-" + dia
+                                        val transacao = Transacao(
+                                            0,
+                                            descricao,
+                                            data,
+                                            idConta,
+                                            valorTransac,
+                                            natureza,
+                                            tipoTransacao
+                                        )
+                                        id = transacaoController.insereTransacao(transacao)
+                                    }
+                            }
+
+                            if (id != -1L)
+                                Toast.makeText(
+                                    getApplicationContext(),
+                                    "Transação cadastrada com sucesso!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            else
+                                Toast.makeText(
+                                    getApplicationContext(),
+                                    "Problemas ao cadastrar a transação. Tente novamente!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+
+                            // Retorna para a Activity principal
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+
+                        // Para transacoes que não irão se repetir:
+                        }else{
+
+                            data = "" + ano + "-" + mes + "-" + dia
+
+                            val transacao = Transacao(
+                                0,
+                                descricao,
+                                data,
+                                idConta,
+                                valorTransac,
+                                natureza,
+                                tipoTransacao
+                            )
+
+                            if (descricao.isEmpty() || day == null || valor.isEmpty()) {
+                                Toast.makeText(
+                                    getApplicationContext(),
+                                    "Favor preencher os campos, por favor.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else {
+
+                                id = transacaoController.insereTransacao(transacao)
+
+                                if (id != -1L)
+                                    Toast.makeText(
+                                        getApplicationContext(),
+                                        "Transação cadastrada com sucesso!",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                else
+                                    Toast.makeText(
+                                        getApplicationContext(),
+                                        "Problemas ao cadastrar a transação. Tente novamente!",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+
+                                // Retorna para a Activity principal
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                            }
+                        }
+
                     }
-                "Semanal" ->
-                    // Loop de quantidade somando 7 aos dias:
-                    for (i in 0..(quantidade-1)){
-                        data = ""+ ano + "-" + mes  + "-" + (dia + 7)
-                        val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
-                        id = transacaoController.insereTransacao(transacao)
-                    }
-                "Mensal" ->
-                    // Loop de quantidade somando 1 ao mes:
-                    for (i in 0..(quantidade-1)){
-                        /*if (mes == 12) {
-                            mes = 0;
-                        }*/
-                        data = "" + ano + "-" + (mes + i) + "-" + dia
-                        val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
-                        id = transacaoController.insereTransacao(transacao)
-                    }
-                "Anual" ->
-                    // Loop de quantidade somando 1 ao ano:
-                    for (i in 0..(quantidade-1)){
-                        data = ""+ (ano + i)  + "-" + mes + "-" + dia
-                        val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
-                        id = transacaoController.insereTransacao(transacao)
-                    }
+                }
+
             }
-        }else {
-            data = ""+ ano  + "-" + mes + "-" + dia
-            val transacao = Transacao(0, descricao, data, idConta, valorTransac, natureza, tipoTransacao)
-            id = transacaoController.insereTransacao(transacao)
         }
-
-        if (id != -1L)
-            Toast.makeText(getApplicationContext(), "Transacao cadastrada com sucesso!", Toast.LENGTH_LONG).show()
-        else
-            Toast.makeText(getApplicationContext(), "Problemas ao cadastrar a transacao. Tente novamente!", Toast.LENGTH_LONG).show()
-
-        // Retorna para a Activity principal
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
     }
 
 }

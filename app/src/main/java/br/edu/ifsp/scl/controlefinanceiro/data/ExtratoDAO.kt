@@ -28,11 +28,12 @@ class ExtratoDAO(context: Context) {
 
         var sql = "SELECT descricao, data, valor FROM " + SQLiteHelper.TABLE_TRANSACAO +
                         " WHERE id_conta = " + idConta +
-                        " AND data = '" + data + "';"
-                          //" AND strftime('%Y/%m/%d', data) >= " + dataIni + " ;"
-                          //" AND strftime('%Y/%m/%d', data) <= " + dataFim + " ;"
+                        " AND strftime('%Y-%m-%d', data) = '" + data + "';"
 
         cursor = database!!.rawQuery(sql, null)
+
+        // Removo o item 0 devido estar inicializando os atributos
+        transacoes.removeAt(0)
 
         while (cursor.moveToNext()) {
             val t = TransacaoDto()
@@ -66,6 +67,9 @@ class ExtratoDAO(context: Context) {
                                        " WHERE natureza = '" + natureza + "'" +
                                        " ORDER BY data DESC;", null)
 
+        // Removo o item 0 devido estar inicializando os atributos
+        transacoes.removeAt(0)
+
         while (cursor.moveToNext()) {
             val t = TransacaoDto()
             t.conta = cursor.getString(0)
@@ -97,6 +101,9 @@ class ExtratoDAO(context: Context) {
                                           " INNER JOIN conta ON conta.id_conta = transacao.id_conta" +
                                           " WHERE tipo = '" + tipo + "'" +
                                           " ORDER BY data DESC;", null)
+
+        // Removo o item 0 devido estar inicializando os atributos
+        transacoes.removeAt(0)
 
         while (cursor.moveToNext()) {
             val t = TransacaoDto()

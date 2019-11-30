@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ifsp.scl.controlefinanceiro.R
 import br.edu.ifsp.scl.controlefinanceiro.dto.TransacaoDto
-import br.edu.ifsp.scl.controlefinanceiro.model.Transacao
 import kotlinx.android.synthetic.main.extrato_item.view.*
 
 
